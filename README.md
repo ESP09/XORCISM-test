@@ -714,7 +714,7 @@ normalized into findings (project → `ASSET`, vuln → `VULNERABILITY` /
 | Type | Connectors |
 |---|---|
 | **Network / web scanners** (tool-runners) | nmap, nuclei, nikto, sqlmap, whatweb, wpscan, WPProbe, w3af, OpenVAS |
-| **Vulnerability / posture (API)** | Nessus, Qualys, Rapid7, Wiz, Lacework, Sysdig, Aikido |
+| **Vulnerability / posture (API)** | Nessus, Qualys, Rapid7, Wiz, Lacework, Sysdig, Aikido, **DefectDojo** |
 | **CVE intelligence** | **OpenCVE** (CVE monitoring → `VULNERABILITY`) |
 | **SCA / supply chain** | Dependency-Track, OSV-Scanner, **depx** (malicious-package audit) |
 | **Offensive / BAS** | Caldera, Metasploit, Metasploit-scan, Burp Suite, SAINT |
@@ -727,6 +727,16 @@ normalized into findings (project → `ASSET`, vuln → `VULNERABILITY` /
   the UI) — e.g. `CALDERA_URL` + `CALDERA_API_KEY`, `QUALYS_API_URL`/`_USER`/`_PASSWORD`,
   `DTRACK_URL` + `DTRACK_API_KEY`.
 - **Remote workers**: `python connectors/runner.py --remote https://host:9292 --token <t> --name kali-01 --capabilities nmap,nuclei`.
+
+**DefectDojo (GovCloud) bridge.** The `defectdojo` connector imports the curated findings of an open-source
+DefectDojo instance into XORCISM's risk model: Product → `ASSET` (tagged with its platform), canonical
+CVE / ZDAY / GHSA → `VULNERABILITY`, with CVSS v3, EPSS and CISA KEV preserved. It is read-only, HTTPS-only
+with full TLS verification (`SSL_CERT_FILE` for an internal CA), proxy-aware, and takes `DD_URL` + `DD_API_TOKEN`
+from the worker environment. It pairs with the **DefectDojo Pro IaC Studio** in
+[ESP09/vuln-mgmt-comp1-IaC](https://github.com/ESP09/vuln-mgmt-comp1-IaC), an AWS GovCloud (CMMC L2 /
+NIST SP 800-171) deployment of DefectDojo whose automation already de-duplicates findings across
+scanners and enriches them from KEV, NVD, GHSA, EPSS and OSV before XORCISM ingests them. See
+[connectors/defectdojo/README.md](connectors/defectdojo/README.md).
 
 Adding a connector = drop a folder with `connector.json` + `run.py`. See
 [docs/CONNECTORS.md](docs/CONNECTORS.md) and

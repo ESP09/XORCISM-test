@@ -1,0 +1,936 @@
+{
+ "count": 20,
+ "next": null,
+ "previous": null,
+ "results": [
+  {
+   "id": 824,
+   "title": "Log4Shell in legacy reporting module",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 502,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2021-44228"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2021-44228",
+   "cvssv3_score": 10,
+   "epss_score": 0.94358,
+   "epss_percentile": 0.99962,
+   "known_exploited": true,
+   "ransomware_used": true,
+   "kev_date": "2021-12-10",
+   "component_name": "org.apache.logging.log4j:log4j-core",
+   "component_version": "2.14.1",
+   "file_path": "case-management",
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Generic Findings Import - case-management",
+     "test_type": {
+      "name": "Generic Findings Import"
+     },
+     "engagement": {
+      "name": "Q4 Penetration Test",
+      "product": {
+       "name": "case-management",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 825,
+   "title": "Token audience not validated by govsso-client",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 287,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "ZDAY-2026-0001"
+    }
+   ],
+   "vuln_id_from_tool": "ZDAY-2026-0001",
+   "cvssv3_score": null,
+   "epss_score": null,
+   "epss_percentile": null,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "govsso-client",
+   "component_version": "3.1.0",
+   "file_path": "case-management",
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Generic Findings Import - case-management",
+     "test_type": {
+      "name": "Generic Findings Import"
+     },
+     "engagement": {
+      "name": "Q4 Penetration Test",
+      "product": {
+       "name": "case-management",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 826,
+   "title": "Prototype pollution in @agency/forms",
+   "severity": "High",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 1321,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "GHSA-2222-3333-4444"
+    }
+   ],
+   "vuln_id_from_tool": "GHSA-2222-3333-4444",
+   "cvssv3_score": null,
+   "epss_score": null,
+   "epss_percentile": null,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "@agency/forms",
+   "component_version": "2.3.0",
+   "file_path": "case-management",
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Generic Findings Import - case-management",
+     "test_type": {
+      "name": "Generic Findings Import"
+     },
+     "engagement": {
+      "name": "Q4 Penetration Test",
+      "product": {
+       "name": "case-management",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 827,
+   "title": "Outdated jQuery library",
+   "severity": "Medium",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 79,
+   "vulnerability_ids": [],
+   "vuln_id_from_tool": null,
+   "cvssv3_score": null,
+   "epss_score": null,
+   "epss_percentile": null,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "jquery",
+   "component_version": "3.4.1",
+   "file_path": "cases.internal.sim",
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Generic Findings Import - case-management",
+     "test_type": {
+      "name": "Generic Findings Import"
+     },
+     "engagement": {
+      "name": "Q4 Penetration Test",
+      "product": {
+       "name": "case-management",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 828,
+   "title": "Missing account lockout",
+   "severity": "Medium",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 307,
+   "vulnerability_ids": [],
+   "vuln_id_from_tool": null,
+   "cvssv3_score": null,
+   "epss_score": null,
+   "epss_percentile": null,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": null,
+   "component_version": null,
+   "file_path": "src/auth/login.ts",
+   "line": 57,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Generic Findings Import - case-management",
+     "test_type": {
+      "name": "Generic Findings Import"
+     },
+     "engagement": {
+      "name": "Q4 Penetration Test",
+      "product": {
+       "name": "case-management",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 829,
+   "title": "requests: Unintended leak of Proxy-Authorization header",
+   "severity": "Medium",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2023-32681"
+    },
+    {
+     "vulnerability_id": "PYSEC-2023-74"
+    },
+    {
+     "vulnerability_id": "GHSA-j8r2-6x86-q33q"
+    }
+   ],
+   "vuln_id_from_tool": "PYSEC-2023-74",
+   "cvssv3_score": 6.1,
+   "epss_score": 0.05,
+   "epss_percentile": 0.9,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "requests",
+   "component_version": "2.28.2",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - grants-tracker",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "grants-tracker",
+       "prod_type": {
+        "name": "Lambda"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 830,
+   "title": "net/netip: Unexpected behavior from Is methods for IPv4-mapped IPv6 addresses",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2024-24790"
+    },
+    {
+     "vulnerability_id": "GO-2024-2887"
+    }
+   ],
+   "vuln_id_from_tool": "GO-2024-2887",
+   "cvssv3_score": 9.8,
+   "epss_score": 0.01,
+   "epss_percentile": 0.7,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "stdlib",
+   "component_version": "1.22.2",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - grants-tracker",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "grants-tracker",
+       "prod_type": {
+        "name": "Lambda"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 831,
+   "title": "CVE-2024-6387 in openssh",
+   "severity": "High",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2024-6387"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2024-6387",
+   "cvssv3_score": 8.1,
+   "epss_score": 0.4,
+   "epss_percentile": 0.97,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "openssh",
+   "component_version": "8.7p1-34.el9",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Wazuh - hr-portal",
+     "test_type": {
+      "name": "Wazuh"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "hr-portal",
+       "prod_type": {
+        "name": "EC2 RHEL 9"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 832,
+   "title": "ZDAY-2024-0001 in xz",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2024-3094"
+    },
+    {
+     "vulnerability_id": "ZDAY-2024-0001"
+    }
+   ],
+   "vuln_id_from_tool": "ZDAY-2024-0001",
+   "cvssv3_score": 10,
+   "epss_score": 0.6,
+   "epss_percentile": 0.98,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "xz",
+   "component_version": "5.6.0-1",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Wazuh - hr-portal",
+     "test_type": {
+      "name": "Wazuh"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "hr-portal",
+       "prod_type": {
+        "name": "EC2 RHEL 9"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 840,
+   "title": "GHSA-jfh8-c2jp-5v3q in log4j-core",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2021-44228"
+    },
+    {
+     "vulnerability_id": "GHSA-jfh8-c2jp-5v3q"
+    }
+   ],
+   "vuln_id_from_tool": "GHSA-jfh8-c2jp-5v3q",
+   "cvssv3_score": 10,
+   "epss_score": 0.94358,
+   "epss_percentile": 0.99962,
+   "known_exploited": true,
+   "ransomware_used": true,
+   "kev_date": "2021-12-10",
+   "component_name": "log4j-core",
+   "component_version": "2.14.1",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Grype - payments-api",
+     "test_type": {
+      "name": "Grype"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 841,
+   "title": "GHSA-599f-7c49-w659 in commons-text",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2022-42889"
+    },
+    {
+     "vulnerability_id": "GHSA-599f-7c49-w659"
+    }
+   ],
+   "vuln_id_from_tool": "GHSA-599f-7c49-w659",
+   "cvssv3_score": 9.8,
+   "epss_score": 0.94,
+   "epss_percentile": 0.999,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "commons-text",
+   "component_version": "1.9",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Grype - payments-api",
+     "test_type": {
+      "name": "Grype"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 842,
+   "title": "log4j-core: Remote code execution in Log4j 2.x (Log4Shell)",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2021-44228"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2021-44228",
+   "cvssv3_score": 10,
+   "epss_score": 0.94358,
+   "epss_percentile": 0.99962,
+   "known_exploited": true,
+   "ransomware_used": true,
+   "kev_date": "2021-12-10",
+   "component_name": "org.apache.logging.log4j:log4j-core",
+   "component_version": "2.14.1",
+   "file_path": "app/lib/log4j-core-2.14.1.jar",
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - payments-api",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 843,
+   "title": "libwebp: Heap buffer overflow in WebP Codec",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2023-4863"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2023-4863",
+   "cvssv3_score": 8.8,
+   "epss_score": 0.45,
+   "epss_percentile": 0.975,
+   "known_exploited": true,
+   "ransomware_used": false,
+   "kev_date": "2023-09-13",
+   "component_name": "libwebp7",
+   "component_version": "1.2.4-0.2+deb12u0",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - payments-api",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 844,
+   "title": "curl: heap based buffer overflow in the SOCKS5 proxy handshake",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2023-38545"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2023-38545",
+   "cvssv3_score": 9.8,
+   "epss_score": 0.32,
+   "epss_percentile": 0.97,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "curl",
+   "component_version": "7.88.1-10",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - payments-api",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 845,
+   "title": "HTTP/2 Stream Cancellation Attack",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2023-44487"
+    },
+    {
+     "vulnerability_id": "GHSA-qppj-fm5r-hxr3"
+    }
+   ],
+   "vuln_id_from_tool": "GHSA-qppj-fm5r-hxr3",
+   "cvssv3_score": 7.5,
+   "epss_score": 0.8,
+   "epss_percentile": 0.99,
+   "known_exploited": true,
+   "ransomware_used": false,
+   "kev_date": "2023-10-10",
+   "component_name": "golang.org/x/net",
+   "component_version": "v0.15.0",
+   "file_path": "usr/local/bin/sidecar",
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - payments-api",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 846,
+   "title": "spring-framework: RCE via Data Binding on JDK 9+ (Spring4Shell)",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2022-22965"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2022-22965",
+   "cvssv3_score": 9.8,
+   "epss_score": 0.97,
+   "epss_percentile": 0.9997,
+   "known_exploited": true,
+   "ransomware_used": false,
+   "kev_date": "2022-04-04",
+   "component_name": "org.springframework:spring-beans",
+   "component_version": "5.3.15",
+   "file_path": "app/lib/spring-beans-5.3.15.jar",
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - payments-api",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 847,
+   "title": "Image user should not be 'root'",
+   "severity": "High",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [],
+   "vuln_id_from_tool": "AVD-DS-0002",
+   "cvssv3_score": null,
+   "epss_score": null,
+   "epss_percentile": null,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": null,
+   "component_version": null,
+   "file_path": "Dockerfile",
+   "line": 1,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Trivy Scan - payments-api",
+     "test_type": {
+      "name": "Trivy Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 848,
+   "title": "CVE-2021-44228 in log4j-core",
+   "severity": "Critical",
+   "active": false,
+   "is_mitigated": false,
+   "duplicate": true,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2021-44228"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2021-44228",
+   "cvssv3_score": 10,
+   "epss_score": null,
+   "epss_percentile": null,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "log4j-core",
+   "component_version": "2.14.1",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "CycloneDX Scan - payments-api",
+     "test_type": {
+      "name": "CycloneDX Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 849,
+   "title": "CVE-2023-46604 in activemq-client",
+   "severity": "Critical",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 502,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2023-46604"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2023-46604",
+   "cvssv3_score": 9.8,
+   "epss_score": 0.94,
+   "epss_percentile": 0.999,
+   "known_exploited": true,
+   "ransomware_used": true,
+   "kev_date": "2023-11-02",
+   "component_name": "activemq-client",
+   "component_version": "5.18.2",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "CycloneDX Scan - payments-api",
+     "test_type": {
+      "name": "CycloneDX Scan"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "payments-api",
+       "prod_type": {
+        "name": "EKS"
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": 853,
+   "title": "CVE-2024-6387 in openssh",
+   "severity": "High",
+   "active": true,
+   "is_mitigated": false,
+   "duplicate": false,
+   "false_p": false,
+   "out_of_scope": false,
+   "cwe": 0,
+   "vulnerability_ids": [
+    {
+     "vulnerability_id": "CVE-2024-6387"
+    }
+   ],
+   "vuln_id_from_tool": "CVE-2024-6387",
+   "cvssv3_score": 8.1,
+   "epss_score": 0.4,
+   "epss_percentile": 0.97,
+   "known_exploited": false,
+   "ransomware_used": false,
+   "kev_date": null,
+   "component_name": "openssh",
+   "component_version": "8.7p1-34.el9",
+   "file_path": null,
+   "line": null,
+   "date": "2026-11-15",
+   "mitigated": null,
+   "related_fields": {
+    "test": {
+     "title": "Wazuh - records-archive",
+     "test_type": {
+      "name": "Wazuh"
+     },
+     "engagement": {
+      "name": "Continuous Scanning",
+      "product": {
+       "name": "records-archive",
+       "prod_type": {
+        "name": "EC2 RHEL 9"
+       }
+      }
+     }
+    }
+   }
+  }
+ ]
+}
