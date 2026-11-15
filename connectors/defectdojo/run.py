@@ -25,6 +25,7 @@ import json
 import os
 import re
 import ssl
+import sys
 import urllib.parse
 import urllib.request
 from typing import Any, Dict, Iterable, List, Optional
@@ -198,17 +199,29 @@ def _parse(findings: List[Dict[str, Any]], product_filter: str, include_mitigate
 
 
 if __name__ == "__main__":
+    # Operator CLI (outside the XORCISM worker): prints XORCISM's normalized result, e.g. to inspect or hand
+    # over an export. Live mode reads DD_URL and DD_API_TOKEN from the environment, like the worker.
     import argparse
     import tempfile
 
-    ap = argparse.ArgumentParser(description="DefectDojo import (dry run)")
-    ap.add_argument("--file")
-    ap.add_argument("--url", default="")
+    ap = argparse.ArgumentParser(description="DefectDojo -> XORCISM normalized result (assets, vulns, components)")
+    ap.add_argument("--file", help="Offline: a saved GET /api/v2/findings/?related_fields=true export")
     ap.add_argument("--product", default="")
     ap.add_argument("--include-mitigated", action="store_true")
     ap.add_argument("--min-severity", default="Info")
+    ap.add_argument("--out", help="Write the JSON result to this file instead of stdout")
     a = ap.parse_args()
-    res = run({"file": a.file, "url": a.url, "product": a.product, "include_mitigated": a.include_mitigated,
-               "min_severity": a.min_severity}, tempfile.mkdtemp())
-    print(json.dumps(res, indent=2, ensure_ascii=False))
-    print(f"\n[defectdojo] {len(res['assets'])} asset(s), {len(res['vulns'])} vuln(s), {len(res['components'])} component(s)", flush=True)
+    params = {"product": a.product, "include_mitigated": a.include_mitigated, "min_severity": a.min_severity}
+    workdir = tempfile.mkdtemp()
+    if a.file:
+        params["file"] = os.path.abspath(a.file)
+        workdir = os.path.dirname(params["file"])  # the operator chose this file explicitly
+    res = run(params, workdir)
+    text = json.dumps(res, indent=2, ensure_ascii=False)
+    if a.out:
+        with open(a.out, "w", encoding="utf-8") as fh:
+            fh.write(text + "\n")
+        print(json.dumps({"out": a.out, "assets": len(res["assets"]), "vulns": len(res["vulns"]), "components": len(res["components"])}))
+    else:
+        print(text)
+    print(f"[defectdojo] {len(res['assets'])} asset(s), {len(res['vulns'])} vuln(s), {len(res['components'])} component(s)", file=sys.stderr, flush=True)
