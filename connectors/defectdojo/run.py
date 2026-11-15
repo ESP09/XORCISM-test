@@ -9,11 +9,13 @@ CISA KEV. This connector imports that curated view into XORCISM's risk model:
   - each finding                         -> VULNERABILITY on that asset, ref = canonical id
   - component_name / component_version   -> components
 
-Live:    read-only GET {url}/api/v2/findings/?related_fields=true (paginated). Token from the worker
-         env DD_API_TOKEN (never a parameter, so it is not stored in the job record). HTTPS only;
-         TLS is always verified (SSL_CERT_FILE / REQUESTS_CA_BUNDLE add an internal CA); HTTPS_PROXY
-         and NO_PROXY are honoured.
-Offline: parse a saved findings JSON export (paginated response, or a bare list).
+Live:    read-only GET $DD_URL/api/v2/findings/?related_fields=true (paginated). The URL and the token
+         (DD_API_TOKEN) both come from the worker env, never from job parameters: a job cannot send the
+         worker's token to another host. HTTPS only; TLS is always verified (SSL_CERT_FILE /
+         REQUESTS_CA_BUNDLE add an internal CA); redirects are refused; HTTPS_PROXY and NO_PROXY are honoured.
+Offline: parse a saved findings JSON export (paginated response, or a bare list) located in the job's
+         workdir, XORCISM's upload directory (XORCISM_UPLOAD_DIR, os.pathsep-separated, else
+         $XORCISM_DB_DIR/uploads) or this connector's folder; other paths are refused.
 
 Stdlib only; no DB access (worker-safe). Returns {project, assets, services, cpes, components, vulns}.
 """
@@ -32,22 +34,52 @@ _SEV_OUT = {"Critical": "critical", "High": "high", "Medium": "medium", "Low": "
 _ID_RE = re.compile(r"^(CVE-\d{4}-\d{4,}|ZDAY-\d{4}-\d{3,6}|GHSA(-[23456789cfghjmpqrvwx]{4}){3}|PYSEC-\d{4}-\d+|GO-\d{4}-\d{4,}|OSV-\d{4}-\d+)$", re.I)
 _PRIORITY = {"CVE": 0, "ZDAY": 1, "GHSA": 2}
 MAX_PAGES = 500
+MAX_FILE_BYTES = 200 * 1024 * 1024
+MAX_PAGE_BYTES = 50 * 1024 * 1024
 
 
-def run(params: Dict[str, Any], workdir: str) -> Dict[str, Any]:  # noqa: ARG001
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """urllib copies the Authorization header to a redirect target, even on another host: refuse redirects."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: D102
+        raise RuntimeError(f"defectdojo: refusing HTTP {code} redirect to {newurl}")
+
+
+def _allowed_file(path: str, workdir: str) -> str:
+    real = os.path.realpath(path)
+    # The job workdir, XORCISM's upload store (XORCISM_UPLOAD_DIR, else $XORCISM_DB_DIR/uploads) and this
+    # connector's own folder (bundled sample.json for --selftest). Nothing else on the worker can be read.
+    roots = [workdir, os.path.dirname(os.path.abspath(__file__))]
+    roots += [d for d in os.getenv("XORCISM_UPLOAD_DIR", "").split(os.pathsep) if d]
+    if not os.getenv("XORCISM_UPLOAD_DIR") and os.getenv("XORCISM_DB_DIR"):
+        roots.append(os.path.join(os.environ["XORCISM_DB_DIR"], "uploads"))
+    for root in roots:
+        base = os.path.realpath(root)
+        if real == base or real.startswith(base.rstrip(os.sep) + os.sep):
+            if not os.path.isfile(real):
+                raise ValueError("defectdojo: 'file' is not a regular file")
+            if os.path.getsize(real) > MAX_FILE_BYTES:
+                raise ValueError("defectdojo: 'file' exceeds the 200 MB limit")
+            return real
+    raise ValueError("defectdojo: 'file' must be inside the job workdir or XORCISM's upload directory")
+
+
+def run(params: Dict[str, Any], workdir: str) -> Dict[str, Any]:
     product = str(params.get("product") or "").strip()
     include_mitigated = str(params.get("include_mitigated") or "").lower() in ("1", "true", "yes")
     min_sev = str(params.get("min_severity") or "Info").strip().capitalize()
     if min_sev not in SEVERITIES:
         raise ValueError(f"defectdojo: min_severity must be one of {SEVERITIES}")
+    if params.get("url"):
+        raise ValueError("defectdojo: the 'url' parameter was removed; set DD_URL in the worker environment")
     if params.get("file"):
-        with open(params["file"], "r", encoding="utf-8", errors="replace") as fh:
+        with open(_allowed_file(str(params["file"]), workdir), "r", encoding="utf-8", errors="replace") as fh:
             data = json.load(fh)
         findings = data.get("results", []) if isinstance(data, dict) else data
     else:
-        base = str(params.get("url") or os.getenv("DD_URL") or "").strip().rstrip("/")
+        base = str(os.getenv("DD_URL") or "").strip().rstrip("/")
         if not base:
-            raise RuntimeError("defectdojo: provide a 'file' (findings JSON export) or a 'url' (+ DD_API_TOKEN in the worker env) for live mode")
+            raise RuntimeError("defectdojo: provide a 'file' (findings JSON export), or set DD_URL and DD_API_TOKEN in the worker env for live mode")
         findings = list(_fetch(base, product, include_mitigated, int(params.get("limit") or 5000)))
     return _parse(findings, product, include_mitigated, min_sev)
 
@@ -66,7 +98,7 @@ def _fetch(base: str, product: str, include_mitigated: bool, limit: int) -> Iter
     token = os.getenv("DD_API_TOKEN") or ""
     if not token:
         raise RuntimeError("defectdojo: DD_API_TOKEN is required in the worker env for live mode")
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler(), urllib.request.HTTPSHandler(context=_ssl_context()))
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler(), urllib.request.HTTPSHandler(context=_ssl_context()), _NoRedirect())
     query: Dict[str, Any] = {"related_fields": "true", "duplicate": "false", "limit": 200}
     if not include_mitigated:
         query["active"] = "true"
@@ -82,7 +114,10 @@ def _fetch(base: str, product: str, include_mitigated: bool, limit: int) -> Iter
         req = urllib.request.Request(url, headers={"Authorization": f"Token {token}", "Accept": "application/json",
                                                    "User-Agent": "xorcism-connector-defectdojo/1.0"})
         with opener.open(req, timeout=60) as resp:
-            page = json.loads(resp.read().decode("utf-8"))
+            raw = resp.read(MAX_PAGE_BYTES + 1)
+            if len(raw) > MAX_PAGE_BYTES:
+                raise RuntimeError("defectdojo: API page exceeds 50 MB")
+            page = json.loads(raw.decode("utf-8"))
         for f in page.get("results") or []:
             yield f
             seen += 1

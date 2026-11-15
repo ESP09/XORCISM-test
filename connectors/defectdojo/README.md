@@ -2,7 +2,7 @@
 
 `defectdojo` · **import** connector · category **Vulnerability Management**
 
-Imports findings from an open-source DefectDojo instance (https://github.com/DefectDojo/django-DefectDojo), e.g. the AWS GovCloud deployment produced by the DefectDojo Pro IaC Studio (ESP09/vuln-mgmt-comp1-IaC). Each DefectDojo Product (software) becomes an ASSET tagged with its Product Type (platform); each finding becomes a vulnerability mapped by its canonical CVE (CVE > ZDAY > GHSA), with severity, CVSS v3, EPSS and CISA KEV flags preserved, and affected components recorded. Live mode: read-only GET /api/v2/findings/ (paginated, related_fields) with an API token from the DD_API_TOKEN worker env; HTTPS only with full TLS verification (SSL_CERT_FILE / REQUESTS_CA_BUNDLE for an internal CA) and the standard HTTPS_PROXY / NO_PROXY variables. Offline mode: parse a saved findings JSON export. Duplicates, false positives and out-of-scope findings are skipped. Stdlib only; no DB access in run.py (worker-safe).
+Imports findings from an open-source DefectDojo instance (https://github.com/DefectDojo/django-DefectDojo), e.g. the AWS GovCloud deployment produced by the DefectDojo Pro IaC Studio (ESP09/vuln-mgmt-comp1-IaC). Each DefectDojo Product (software) becomes an ASSET tagged with its Product Type (platform); each finding becomes a vulnerability mapped by its canonical CVE (CVE > ZDAY > GHSA), with severity, CVSS v3, EPSS and CISA KEV flags preserved, and affected components recorded. Live mode: read-only GET /api/v2/findings/ (paginated, related_fields) against DD_URL with the DD_API_TOKEN API token, both from the worker env (never job parameters), redirects refused; HTTPS only with full TLS verification (SSL_CERT_FILE / REQUESTS_CA_BUNDLE for an internal CA) and the standard HTTPS_PROXY / NO_PROXY variables. Offline mode: parse a saved findings JSON export. Duplicates, false positives and out-of-scope findings are skipped. Stdlib only; no DB access in run.py (worker-safe).
 
 **Upstream:** https://github.com/DefectDojo/django-DefectDojo
 
@@ -10,8 +10,7 @@ Imports findings from an open-source DefectDojo instance (https://github.com/Def
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | no | — | DefectDojo base URL, e.g. https://dojo.example.gov (or DD_URL in the worker env). HTTPS only. |
-| `file` | file | no | — | Offline mode: a saved findings export (GET /api/v2/findings/?related_fields=true JSON, a single page or a list of findings). |
+| `file` | file | no | — | Offline mode: a saved findings export (GET /api/v2/findings/?related_fields=true JSON, a single page or a list of findings), inside the job workdir or XORCISM's upload directory. |
 | `product` | string | no | — | Only import findings of this DefectDojo Product (software) name. |
 | `include_mitigated` | bool | no | `False` | Also import mitigated/inactive findings (default: active only). |
 | `min_severity` | string | no | `Info` | Minimum severity to import: Critical, High, Medium, Low or Info. |
